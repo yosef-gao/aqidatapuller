@@ -6,4 +6,4 @@ def app(environ, start_response):
     start_response(status, response_headers)
     return ['Hello, world!']
 
-    application = sae.create_wsgi_app(app)
+application = sae.create_wsgi_app(app)
