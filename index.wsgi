@@ -12,6 +12,6 @@ def app(environ, start_response):
     soup = BeautifulSoup(data)
     tag_pm25 = soup.select("#cur_pm25")
     start_response(status, response_headers)
-    return [tag_pm25[0].string]
+    return [tag_pm25[0].string.__str__()]
 
 application = sae.create_wsgi_app(app)
