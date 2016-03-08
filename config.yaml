@@ -2,6 +2,6 @@ name: qidatapuller
 version: 1
 
 cron:
-    - description:task
+    - description: task
       url: /
-      schedule: "*/1 * * * *"
+      schedule: every 1 mins
