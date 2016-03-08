@@ -4,4 +4,4 @@ version: 1
 cron:
     - description:task
       url: /
-      schedule: */1 * * * *
+      schedule: "*/1 * * * *"
