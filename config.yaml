@@ -3,5 +3,5 @@ version: 1
 
 cron:
     - description:task
-      url: /cron/task
-      schedule: 0 */1 * * *
+      url: /index
+      schedule: */1 * * * *
