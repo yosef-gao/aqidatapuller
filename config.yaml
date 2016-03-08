@@ -1,2 +1,7 @@
 name: qidatapuller
 version: 1
+
+cron:
+    - description:task
+      url: /cron/task
+      schedule: 0 */1 * * *
