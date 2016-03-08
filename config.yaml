@@ -4,4 +4,4 @@ version: 1
 cron:
     - description: task
       url: /
-      schedule: every 1 mins
+      schedule: every 1 hour
