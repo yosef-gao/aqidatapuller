@@ -53,8 +53,3 @@ def is_file_in_bucket(filename):
         if bucket_object['name'] == filename:
             return True
     return False
-    #file_obj = bucket.get_object(filename)
-    #if file_obj == Null:
-    #    return True
-    #else:
-    #    return False
