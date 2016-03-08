@@ -3,5 +3,5 @@ version: 1
 
 cron:
     - description:task
-      url: /index
+      url: /index.wsgi
       schedule: */1 * * * *
