@@ -4,7 +4,7 @@ import time
 from sae.storage import Bucket
 from StringIO import StringIO
 
-ISOTIMEFORMAT='%m/%d/%y %X'
+ISOTIMEFORMAT='%Y/%m/%d %X'
 DATETIMEFORMAT = '%Y_%m_%d'
 TITLE_STR = 'Site,Parameter,Date(LST),Year,Month,Day,Hour,Value,Unit,Duration\r\n'
 WRITE_STR = '%s,PM2.5,%s,%d,%d,%d,%d,%d,ug/m3,%d Hr\r\n'
@@ -35,7 +35,7 @@ def write_aqi_to_file(city):
     date_str = time.strftime(DATETIMEFORMAT, time.localtime())
     time_s = time.localtime()
     string_file = StringIO()
-    filename = date_str + '%s' % '.csv'
+    filename = '%s/%s.csv' % (city, date_str)
     value = get_aqi(city)
     # if there is no such file, then write the title
     if not is_file_in_bucket(filename):
