@@ -18,7 +18,8 @@ def app(environ, start_response):
     data = urllib.urlopen(url).read()
     aqi_json = json.loads(data)
     bucket.put_object('1.txt', data)
+    path = bucket.generate_url('1.txt')
     start_response(status, response_headers)
-    return [aqi_json['aqi'].__str__()]
+    return [path]
 
 application = sae.create_wsgi_app(app)
