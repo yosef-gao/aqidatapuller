@@ -3,14 +3,21 @@ import json
 import time
 from sae.storage import Bucket
 from StringIO import StringIO
+from sae.ext.storage import monkey
 
-ISOTIMEFORMAT='%Y/%m/%d %X'
+ISOTIMEFORMAT = '%Y/%m/%d %X'
 DATETIMEFORMAT = '%Y_%m_%d'
 TITLE_STR = 'Site,Parameter,Date(LST),Year,Month,Day,Hour,Value,Unit,Duration\r\n'
 WRITE_STR = '%s,PM2.5,%s,%d,%d,%d,%d,%d,ug/m3,%d Hr\r\n'
 url = 'http://aqicn.org/aqicn/json/android/%s/json'
 BUCKET_NAME = 'aqi'
 DURATION = 1
+
+def append_data():
+    #monkey.patch_all()
+    ff = open('/s/aqi/2016_03_08.csv', "w+")
+    ff.write('123')
+    bucket = Bucket()
 
 def get_aqi(city):
     url_with_city = url % city

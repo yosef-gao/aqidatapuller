@@ -1,9 +1,7 @@
 import sae
 import urllib
-import json
-import os
 from pull_data import write_aqi_to_file
-from sae.storage import Bucket
+from mysql_db import mysql 
 
 city_list = ['hangzhou', 'beijing', 'shijiazhuang']
 
@@ -13,6 +11,8 @@ def app(environ, start_response):
     for city in city_list:
         url = write_aqi_to_file(city)
     start_response(status, response_headers)
-    return [url]
+    result = mysql()
+    return ['%s' % result]
+    #return [url]
 
 application = sae.create_wsgi_app(app)
