@@ -21,5 +21,5 @@ class DatePuller(object):
         aqi_json = json.loads(data)
         if aqi_json.has_key('aqi'):
             return aqi_json['aqi']
-        else
+        else:
             return -1
