@@ -19,4 +19,7 @@ class DatePuller(object):
                 break
 
         aqi_json = json.loads(data)
-        return aqi_json['aqi']
+        if aqi_json.has_key('aqi'):
+            return aqi_json['aqi']
+        else
+            return -1

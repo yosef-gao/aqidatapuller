@@ -16,7 +16,10 @@ def cron_task():
 
     for city in citylist:
         value = date_puller.pull_data(city)
-        mysql.insert_data(city, value)
+        if value == -1:
+            contine
+        else:
+            mysql.insert_data(city, value)
 
     # done!
 
