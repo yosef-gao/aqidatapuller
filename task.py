@@ -31,3 +31,19 @@ def generate_csv_url(site):
     for line in results:
         csv_generator.write_line(line[0], line[1])
     return [True, csv_generator.generate_csv_file()]
+
+def generate_city_list():
+    values = []
+    #read citylist
+    BUCKET = 'citylist'
+    # read citylist
+    bucket = Bucket(BUCKET)
+    citylist_content = bucket.get_object_contents('capital_cities_has_data.txt')
+    citylist = citylist_content.split()
+
+    values.append('<ul>')
+    for city in citylist:
+        line = '''<li><a href="%s/%s">%s</li>''' % ('http://aqidatapuller.applinzi.com', city, city)
+        values.append(line)
+    values.append('</ul>')
+    return ''.join(values)

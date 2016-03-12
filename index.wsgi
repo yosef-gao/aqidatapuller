@@ -2,14 +2,16 @@ import sae
 sae.add_vendor_dir('vendor')
 
 from bottle import Bottle, run
-from task import cron_task, generate_csv_url
+from task import cron_task, generate_csv_url, generate_city_list
 from csv_generator import CSVGenerator
 
 app = Bottle()
 
 @app.route('/')
 def hello():
-    return "Welcome"
+    list = generate_city_list()
+    print list
+    return "<br/><br/>Welcome<br/> %s" % list
 
 @app.route('/task.py')
 def task():
