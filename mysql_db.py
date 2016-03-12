@@ -26,7 +26,7 @@ class Mysql:
                 if site_id == 0:
                     print 'site %s has no data' % site
                 else:
-                    self.cur.execute('select value, date from pm25_value_table where site_id = %d' % site_id)
+                    self.cur.execute('select value, date from pm25_value_table where site_id = %d order by date' % site_id)
                     results = self.cur.fetchall()
                     return results
             except MySQLdb.Error, e:
