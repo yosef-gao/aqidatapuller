@@ -11,7 +11,7 @@ app = Bottle()
 def hello():
     list = generate_city_list()
     print list
-    return "<br/><br/>Welcome<br/> %s" % list
+    return "<br/><br/>Welcome! Here is the city list:<br/> %s" % list
 
 @app.route('/task.py')
 def task():
