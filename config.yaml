@@ -1,0 +1,7 @@
+name: aqidatapuller
+version: 1
+
+cron:
+    - description: task
+      url: /task.py
+      schedule: every 1 hour
