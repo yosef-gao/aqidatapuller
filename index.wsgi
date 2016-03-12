@@ -1,18 +1,20 @@
 import sae
-import urllib
-from pull_data import write_aqi_to_file
-from mysql_db import mysql 
-
-city_list = ['hangzhou', 'beijing', 'shijiazhuang']
+from csv_generator import CSVGenerator
+from mysql_db import Mysql
 
 def app(environ, start_response):
     status = '200 OK'
     response_headers = [('Content-type', 'text/plain')]
-    for city in city_list:
-        url = write_aqi_to_file(city)
+    
+    # query data from mdb
+    site = 'beijing'
+    mysql = Mysql()
+    results = mysql.query_data(site) 
+    csv_generator = CSVGenerator(site)
+    for line in results:
+        csv_generator.write_line(line[0], line[1])
+    file_url = csv_generator.generate_csv_file()
     start_response(status, response_headers)
-    result = mysql()
-    return ['%s' % result]
-    #return [url]
+    return [file_url]
 
 application = sae.create_wsgi_app(app)

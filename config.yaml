@@ -3,5 +3,5 @@ version: 1
 
 cron:
     - description: task
-      url: /
+      url: /task.py
       schedule: every 1 hour
