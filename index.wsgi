@@ -1,6 +1,6 @@
 import sae
 from bottle import Bottle, run
-from task.py import cron_task
+from task import cron_task
 
 app = Bottle()
 
