@@ -18,6 +18,11 @@ def task():
 
 @app.route('/<site>')
 def site_url(site):
-    return ''' Get %s aqi file from <a href="%s">%s</a> ''' %  (site, generate_csv_url(site), site)
+    url_result = generate_csv_url(site)
+    if url_result[0] == True:
+        return ''' Welcome!<br/>Get %s aqi file from <a href="%s">%s</a> ''' % (site, generate_csv_url(site), site)
+    else:
+        return ''' Welcome!<br/>%s has no aqi data, visit <a href="http://aqicn.org">aqicn.org</a> for more information ''' % (site)
+
 
 application = sae.create_wsgi_app(app)

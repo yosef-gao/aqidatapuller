@@ -26,6 +26,8 @@ def generate_csv_url(site):
     # query data from db
     mysql = Mysql()
     results = mysql.query_data(site)
+    if results == None:
+        return [False, None]
     for line in results:
         csv_generator.write_line(line[0], line[1])
-    return csv_generator.generate_csv_file()
+    return [True, csv_generator.generate_csv_file()]
