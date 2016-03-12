@@ -1,0 +1,8 @@
+../bottle.py
+../bottle.pyc
+./
+top_level.txt
+SOURCES.txt
+dependency_links.txt
+PKG-INFO
+../../../bin/bottle.py

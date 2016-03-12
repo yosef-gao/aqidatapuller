@@ -1,4 +1,6 @@
 import sae
+sae.add_vendor_dir('vendor')
+
 from bottle import Bottle, run
 from task import cron_task, generate_csv_url
 from csv_generator import CSVGenerator
