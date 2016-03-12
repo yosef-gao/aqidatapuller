@@ -10,10 +10,8 @@ class DatePuller(object):
         # try 5 ti
         for i in range(DatePuller.TRYTIMES):
             try:
-                data = urllib2.urlopen(url_with_site).read()
-            except urllib2.HTTPError, e:
-                print 'pull_data() %d: %s' % (e.args[0], e.args[1])
-            except urllib2.URLError, e:
+                data = urllib2.urlopen(url_with_site, timeout=3).read()
+            except Exception, e:
                 print 'pull_data() %d: %s' % (e.args[0], e.args[1])
             else:
                 break
