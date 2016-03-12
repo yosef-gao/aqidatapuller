@@ -5,7 +5,7 @@ from task import cron_task
 app = Bottle()
 
 @app.route('/')
-def app(environ, start_response):
+def hello():
     return "Welcome"
 
 @app.route('/task.py')
