@@ -47,7 +47,6 @@ class Mysql:
             # if no such site, create it
             if site_id == 0:
                 site_id = self.insert_site(site)
-            print 'value is : %d' % value
             count = self.cur.execute(''' insert into pm25_value_table (`date`, `value`, `site_id`) values(now(), %d, %d) ''' % (value, site_id))
             self.db.commit()
             return count

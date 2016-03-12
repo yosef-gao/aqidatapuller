@@ -24,6 +24,5 @@ class CSVGenerator(object):
 
     def generate_csv_file(self):
         bucket = Bucket(CSVGenerator.BUCKET_NAME)
-        print self.filename
         bucket.put_object(self.filename, self.file.getvalue())
         return bucket.generate_url(self.filename)
