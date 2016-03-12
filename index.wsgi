@@ -1,9 +1,16 @@
 import sae
+from bottle import Bottle, run
+from task.py import cron_task
 
+app = Bottle()
+
+@app.route('/')
 def app(environ, start_response):
-    status = '200 OK'
-    response_headers = [('Content-type', 'text/plain')]
-    start_response(status, response_headers)    
-    return ["Welcome"]
+    return "Welcome"
+
+@app.route('/task.py')
+def task():
+    cron_task()
+    return "succeed"
 
 application = sae.create_wsgi_app(app)
