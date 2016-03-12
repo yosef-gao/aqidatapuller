@@ -44,11 +44,11 @@ class Mysql:
     def insert_data(self, site, value):
         try:
             site_id = self.query_site_id(site)
-            print site_id
             # if no such site, create it
             if site_id == 0:
                 site_id = self.insert_site(site)
-            count = self.cur.execute('insert into pm25_value_table (`date`, `value`, `site_id`) values(now(), %d, %s)' % (value, site_id))
+            print 'value is : %d' % value
+            count = self.cur.execute(''' insert into pm25_value_table (`date`, `value`, `site_id`) values(now(), %d, %d) ''' % (value, site_id))
             self.db.commit()
             return count
         except MySQLdb.Error,e:

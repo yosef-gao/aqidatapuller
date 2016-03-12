@@ -6,9 +6,9 @@ class DatePuller(object):
     TRYTIMES = 5
 
     def pull_data(self, site):
-        url_with_site = URL % site
+        url_with_site = DatePuller.URL % site
         # try 5 ti
-        for i in range(TRYTIMES):
+        for i in range(DatePuller.TRYTIMES):
             try:
                 data = urllib2.urlopen(url_with_site).read()
             except urllib2.HTTPError, e:
@@ -18,4 +18,5 @@ class DatePuller(object):
             else:
                 break
 
-        aqi_json = json.loads['aqi']
+        aqi_json = json.loads(data)
+        return aqi_json['aqi']
