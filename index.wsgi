@@ -16,6 +16,6 @@ def task():
 
 @app.route('/<site>')
 def site_url(site):
-    return ''' Get %s aqi file frome <a href="%s">%s</a> ''' %  (site, generate_csv_url(site), site)
+    return ''' Get %s aqi file from <a href="%s">%s</a> ''' %  (site, generate_csv_url(site), site)
 
 application = sae.create_wsgi_app(app)
