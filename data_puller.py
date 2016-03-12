@@ -12,7 +12,7 @@ class DatePuller(object):
             try:
                 data = urllib2.urlopen(url_with_site, timeout=3).read()
             except Exception, e:
-                print 'pull_data() %d: %s' % (e.args[0], e.args[1])
+                print 'pull_data() error %s' % (url_with_site)
             else:
                 break
 
