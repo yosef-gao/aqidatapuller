@@ -7,6 +7,7 @@ class DatePuller(object):
 
     def pull_data(self, site):
         url_with_site = DatePuller.URL % site
+        data = ''
         # try 5 ti
         for i in range(DatePuller.TRYTIMES):
             try:
@@ -16,6 +17,8 @@ class DatePuller(object):
             else:
                 break
 
+        if data == '':
+            return -1
         aqi_json = json.loads(data)
         if aqi_json.has_key('aqi'):
             return aqi_json['aqi']
