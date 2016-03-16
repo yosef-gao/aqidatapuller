@@ -41,11 +41,11 @@ def generate_city_list():
     # read citylist
     bucket = Bucket(BUCKET)
     citylist_content = bucket.get_object_contents('cities.json')
-    citylist = citylist_content.split()
+    citylist = json.loads(citylist_content)
 
     values.append('<ul>')
     for city in citylist:
-        line = '''<li><a href="%s/%s">%s</li>''' % ('http://aqidatapuller.applinzi.com', city['city'].lower(), city)
+        line = '''<li><a href="%s/%s">%s</li>''' % ('http://aqidatapuller.applinzi.com', city['city'].lower(), city['city'])
         values.append(line)
     values.append('</ul>')
     return ''.join(values)
