@@ -1,27 +1,26 @@
-from data_puller import DatePuller
+from data_puller import DataPuller
 from sae.storage import Bucket
 from mysql_db import Mysql
 from csv_generator import CSVGenerator
+import json
 
 def cron_task():
     BUCKET = 'citylist'
     # read citylist
     bucket = Bucket(BUCKET)
-    citylist_content = bucket.get_object_contents('capital_cities_has_data.txt')
-    citylist = citylist_content.split()
+    citylist_content = bucket.get_object_contents('cities.json')
+    cities = json.loads(citylist)
     # datepuller
-    date_puller = DatePuller()
+    data_puller = DataPuller()
     # mysql
     mysql = Mysql()
 
-    for city in citylist:
-        value = date_puller.pull_data(city)
-        if value == -1:
-            continue
-        else:
-            mysql.insert_data(city, value)
+    for city in cities:
+        value = date_puller.pull_data(int(city['cid']))
+        if value:
+            print "insert %s: %d" % (city['city'], int(value))
+            mysql.insert_data(city['city'], int(value))
 
-    # done!
 
 def generate_csv_url(site):
     # csv generator
@@ -41,12 +40,12 @@ def generate_city_list():
     BUCKET = 'citylist'
     # read citylist
     bucket = Bucket(BUCKET)
-    citylist_content = bucket.get_object_contents('capital_cities_has_data.txt')
+    citylist_content = bucket.get_object_contents('cities.json')
     citylist = citylist_content.split()
 
     values.append('<ul>')
     for city in citylist:
-        line = '''<li><a href="%s/%s">%s</li>''' % ('http://aqidatapuller.applinzi.com', city, city)
+        line = '''<li><a href="%s/%s">%s</li>''' % ('http://aqidatapuller.applinzi.com', city['city'].lower(), city)
         values.append(line)
     values.append('</ul>')
     return ''.join(values)

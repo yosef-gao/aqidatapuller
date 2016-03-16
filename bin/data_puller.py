@@ -1,26 +1,34 @@
 import urllib2
 import json
+import socket
+import re
 
-class DatePuller(object):
-    URL = 'http://aqicn.org/aqicn/json/android/%s/json'
-    TRYTIMES = 5
+class DataPuller(object):
+    # URL = 'http://aqicn.org/aqicn/json/android/%s/json'
+    URL = 'http://aqicn.org/map/world'
+    TRYTIMES = 10
 
-    def pull_data(self, site):
-        url_with_site = DatePuller.URL % site
-        data = ''
-        # try 5 ti
-        for i in range(DatePuller.TRYTIMES):
+    def __init__(self):
+        data = None
+        for i in range(DataPuller.TRYTIMES):
             try:
-                data = urllib2.urlopen(url_with_site, timeout=3).read()
+                file = urllib2.urlopen(DataPuller.URL, timeout=3)
+                if file:
+                    data = file.read()
+            except urllib2.URLError, e:
+                print 'Error in DatePuller reason:%s' % (e.reason)
             except Exception, e:
-                print 'pull_data() error %s' % (url_with_site)
+                print 'Error in DatePuller %s' % e.args[0]
             else:
                 break
 
-        if data == '':
-            return -1
-        aqi_json = json.loads(data)
-        if aqi_json.has_key('aqi'):
-            return aqi_json['aqi']
-        else:
-            return -1
+        if data:
+            fullMapJsonString = re.search("(?<=mapInitWithData\()\[.*\](?=\))", data)
+            cities = None
+            if fullMapJsonString:
+                self.cities = json.loads(fullMapJsonString.group(0))
+
+    def pull_data(self, site_id):
+        for city in self.cities:
+            if city['x'] == site_id:
+                return city['aqi']
