@@ -5,6 +5,5 @@
 Todo List:
 -----------
 
-1. 分解任务，解决MySQL server has gone away 错误；
-2. 想办法解决urllib2 的timeout问题；
-3. 一个稍微美化的主页。
+1. 一个稍微美化的主页。
+2. 
