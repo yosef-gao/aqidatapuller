@@ -9,7 +9,7 @@ def cron_task():
     # read citylist
     bucket = Bucket(BUCKET)
     citylist_content = bucket.get_object_contents('cities.json')
-    cities = json.loads(citylist)
+    cities = json.loads(citylist_content)
     # datepuller
     data_puller = DataPuller()
     # mysql
