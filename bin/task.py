@@ -18,7 +18,6 @@ def cron_task():
     for city in cities:
         value = data_puller.pull_data(int(city['cid']))
         if value:
-            print "insert %s: %d" % (city['city'], int(value))
             mysql.insert_data(city['city'], int(value))
 
 
